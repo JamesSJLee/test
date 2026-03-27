@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+
+<html class="light" lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>경영집행위원회 - Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "error": "#9f403d",
+                        "surface-container-lowest": "#ffffff",
+                        "outline": "#737c7f",
+                        "primary-dim": "#485367",
+                        "on-surface-variant": "#586064",
+                        "on-primary-container": "#475266",
+                        "surface-dim": "#d1dce0",
+                        "tertiary-fixed-dim": "#c1d0e6",
+                        "surface-container-low": "#f1f4f6",
+                        "on-error": "#fff7f6",
+                        "secondary-fixed-dim": "#c5d6f0",
+                        "primary-container": "#d8e3fb",
+                        "primary": "#545f73",
+                        "on-error-container": "#752121",
+                        "on-primary": "#f6f7ff",
+                        "surface-container": "#eaeff1",
+                        "inverse-primary": "#dae6fe",
+                        "on-secondary-fixed": "#314055",
+                        "secondary-container": "#d3e4fe",
+                        "inverse-surface": "#0c0f10",
+                        "error-dim": "#4e0309",
+                        "on-tertiary-container": "#414f62",
+                        "surface-bright": "#f8f9fa",
+                        "tertiary": "#526073",
+                        "error-container": "#fe8983",
+                        "tertiary-fixed": "#cfdef5",
+                        "surface-tint": "#545f73",
+                        "on-tertiary-fixed-variant": "#4a596c",
+                        "primary-fixed": "#d8e3fb",
+                        "secondary-fixed": "#d3e4fe",
+                        "on-primary-fixed": "#354053",
+                        "on-secondary-container": "#435368",
+                        "on-secondary": "#f7f9ff",
+                        "outline-variant": "#abb3b7",
+                        "on-primary-fixed-variant": "#515c70",
+                        "secondary-dim": "#44546a",
+                        "secondary": "#506076",
+                        "on-tertiary": "#f7f9ff",
+                        "tertiary-dim": "#465467",
+                        "on-surface": "#2b3437",
+                        "surface": "#f8f9fa",
+                        "surface-container-highest": "#dbe4e7",
+                        "tertiary-container": "#cfdef5",
+                        "on-tertiary-fixed": "#2e3d4e",
+                        "primary-fixed-dim": "#cad5ed",
+                        "on-background": "#2b3437",
+                        "on-secondary-fixed-variant": "#4d5d73",
+                        "background": "#f8f9fa",
+                        "surface-variant": "#dbe4e7",
+                        "inverse-on-surface": "#9b9d9e",
+                        "surface-container-high": "#e2e9ec"
+                    },
+                    fontFamily: {
+                        "headline": ["Manrope"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3, .font-headline { font-family: 'Manrope', sans-serif; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-md border-b border-slate-200/10 shadow-[0_20px_50px_rgba(43,52,55,0.05)] flex justify-between items-center px-12 py-4">
+<div class="flex items-center gap-8">
+<span class="text-xl font-bold text-slate-700 tracking-tight font-headline">경영집행위원회</span>
+<div class="hidden md:flex gap-6">
+<a class="text-slate-900 border-b-2 border-slate-500 pb-1 font-['Manrope'] font-semibold tracking-tight" href="#">Home</a>
+<a class="text-slate-500 hover:text-slate-700 transition-colors font-['Manrope'] font-semibold tracking-tight" href="#">Meetings</a>
+<a class="text-slate-500 hover:text-slate-700 transition-colors font-['Manrope'] font-semibold tracking-tight" href="#">Tasks</a>
+<a class="text-slate-500 hover:text-slate-700 transition-colors font-['Manrope'] font-semibold tracking-tight" href="#">Reports</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<!-- Role Selection Indicator -->
+<div class="flex items-center gap-2 bg-surface-container px-3 py-1.5 rounded-full border border-outline-variant/10">
+<span class="text-[10px] uppercase tracking-widest text-on-surface-variant font-bold">Role</span>
+<span class="text-sm font-semibold text-primary">대표님</span>
+<span class="material-symbols-outlined text-sm text-outline">expand_more</span>
+</div>
+<button class="material-symbols-outlined text-slate-600 hover:text-slate-900 transition-colors" data-icon="account_circle">account_circle</button>
+</div>
+</nav>
+<!-- SideNavBar -->
+<aside class="h-screen w-64 fixed left-0 top-0 pt-20 bg-slate-50 flex flex-col p-6 space-y-4">
+<div class="mb-6">
+<h2 class="text-lg font-['Manrope'] font-bold text-slate-700">Workflow</h2>
+<p class="text-xs text-slate-500">Executive Steering</p>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 p-3 text-slate-500 hover:bg-slate-200 transition-all rounded-md font-['Inter'] text-sm font-medium" href="#">
+<span class="material-symbols-outlined" data-icon="pending_actions">pending_actions</span>
+<span>Pre-Meeting</span>
+</a>
+<a class="flex items-center gap-3 p-3 text-slate-500 hover:bg-slate-200 transition-all rounded-md font-['Inter'] text-sm font-medium" href="#">
+<span class="material-symbols-outlined" data-icon="rate_review">rate_review</span>
+<span>Review</span>
+</a>
+<!-- Active State: Meeting -->
+<a class="flex items-center gap-3 p-3 bg-white text-slate-900 shadow-sm rounded-md font-['Inter'] text-sm font-medium" href="#">
+<span class="material-symbols-outlined" data-icon="groups">groups</span>
+<span>Meeting</span>
+</a>
+<a class="flex items-center gap-3 p-3 text-slate-500 hover:bg-slate-200 transition-all rounded-md font-['Inter'] text-sm font-medium" href="#">
+<span class="material-symbols-outlined" data-icon="assignment_turned_in">assignment_turned_in</span>
+<span>Post-Meeting</span>
+</a>
+</nav>
+<div class="pt-6 border-t border-slate-200 space-y-1">
+<a class="flex items-center gap-3 p-2 text-slate-500 hover:bg-slate-200 transition-all rounded-md text-xs" href="#">
+<span class="material-symbols-outlined text-sm" data-icon="settings">settings</span>
+<span>Settings</span>
+</a>
+<a class="flex items-center gap-3 p-2 text-slate-500 hover:bg-slate-200 transition-all rounded-md text-xs" href="#">
+<span class="material-symbols-outlined text-sm" data-icon="help_outline">help_outline</span>
+<span>Support</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="ml-64 pt-24 p-12 min-h-screen bg-surface">
+<header class="mb-12 flex justify-between items-end">
+<div>
+<h1 class="text-4xl font-extrabold tracking-tight font-headline text-on-surface mb-2">Executive Dashboard</h1>
+<p class="text-on-surface-variant font-body">제 24-08차 정기 경영집행위원회 진행 현황</p>
+</div>
+<button class="bg-primary text-on-primary rounded-md px-6 py-3 transition-all hover:bg-primary-dim active:scale-95 flex items-center gap-2">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+<span class="font-semibold">수시회의 모집</span>
+</button>
+</header>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-12 gap-8">
+<!-- Step 1: Pre-Meeting (Asymmetric Section) -->
+<section class="col-span-12 lg:col-span-4 space-y-6">
+<div class="flex items-center justify-between">
+<h3 class="text-sm font-bold uppercase tracking-widest text-outline">01 Pre-Meeting</h3>
+<span class="px-2 py-0.5 rounded bg-surface-container-high text-[10px] font-bold text-primary">PREPARATION</span>
+</div>
+<div class="bg-white rounded-lg p-6 shadow-sm ring-1 ring-black/[0.03] space-y-6">
+<div class="flex items-start gap-4">
+<div class="p-3 bg-primary-container rounded-lg text-primary">
+<span class="material-symbols-outlined" data-icon="upload_file">upload_file</span>
+</div>
+<div>
+<h4 class="font-bold text-on-surface">Agenda Upload</h4>
+<p class="text-xs text-on-surface-variant mt-1">상정 안건 4건 등록 완료</p>
+</div>
+</div>
+<div class="p-4 bg-surface-container-low rounded-md border-l-4 border-primary">
+<div class="flex items-center justify-between mb-2">
+<span class="text-xs font-bold text-primary">Auto-open Session</span>
+<span class="material-symbols-outlined text-sm text-primary">schedule</span>
+</div>
+<p class="text-sm text-on-surface">회의 세션 14:00 자동 활성화 예정</p>
+</div>
+</div>
+</section>
+<!-- Step 2: Review -->
+<section class="col-span-12 lg:col-span-8 space-y-6">
+<div class="flex items-center justify-between">
+<h3 class="text-sm font-bold uppercase tracking-widest text-outline">02 Review Phase</h3>
+<div class="flex items-center gap-2 text-error font-bold text-sm">
+<span class="material-symbols-outlined text-sm">timer</span>
+<span>Deadline: 12h 45m</span>
+</div>
+</div>
+<div class="bg-white rounded-lg p-6 shadow-sm ring-1 ring-black/[0.03]">
+<div class="flex justify-between items-center mb-6">
+<h4 class="font-bold text-on-surface">Pre-comments (사전 코멘트)</h4>
+<div class="flex gap-2">
+<span class="px-3 py-1 bg-surface-container text-xs rounded-full text-on-surface-variant">Reviewing (8/12)</span>
+</div>
+</div>
+<div class="space-y-4">
+<div class="p-4 bg-surface-container-low rounded-md flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="w-8 h-8 rounded-full bg-slate-200">
+<img alt="Reviewer" class="w-full h-full rounded-full" data-alt="Professional headshot of an executive reviewer" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBfAxdThlyr6Z6Dcb3uqbhso37eHycw5am4l12AX1pMGlYXwKynvGSbaxjM-eCD0A529xD5BXK04xE9Lfrl8PmfnyOPnWjtiTUJLab4IEol6e4aOpsTjIUo8QQpagEgU8amyON_PkNn7CrD7-lqI0KLgJtyLy2FOIYhmb2T_i7V3NdfJKTg7vIiKdAEybXtEClfeS6cmHdWDm3Ab4dq9h9EER9v-nnUtWxfXcsPV3wVchpMh7WpynIoGakKgoVrGXA1-iicXxVp7X-c"/>
+</div>
+<div>
+<p class="text-sm font-semibold">전략기획본부장</p>
+<p class="text-xs text-on-surface-variant">안건 2번에 대한 예산 재검토 의견 제출</p>
+</div>
+</div>
+<span class="text-[10px] text-outline">10 mins ago</span>
+</div>
+<div class="flex gap-4 items-center pt-4 border-t border-outline-variant/10">
+<span class="text-xs font-bold text-on-surface-variant">Coordination:</span>
+<div class="flex gap-2">
+<button class="px-4 py-1.5 border border-outline-variant/30 text-xs rounded-md hover:bg-surface-container transition-colors">Relocate Agenda</button>
+<button class="px-4 py-1.5 border border-outline-variant/30 text-xs rounded-md hover:bg-surface-container transition-colors">Request Revision</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Step 3: Meeting (High Intensity Focus) -->
+<section class="col-span-12 lg:col-span-7 space-y-6">
+<div class="flex items-center justify-between">
+<h3 class="text-sm font-bold uppercase tracking-widest text-outline">03 Active Meeting</h3>
+<div class="bg-primary text-on-primary px-3 py-1 rounded-full text-xs font-bold animate-pulse">LIVE</div>
+</div>
+<div class="bg-white rounded-lg p-8 shadow-sm ring-1 ring-black/[0.03] border-t-4 border-primary">
+<div class="text-center mb-8">
+<span class="text-[10px] uppercase tracking-widest text-outline block mb-2">Elapsed Time</span>
+<div class="text-5xl font-extrabold font-headline tracking-tighter text-on-surface">15:00</div>
+<p class="text-sm text-on-surface-variant mt-4">Current: 안건 3. 글로벌 시장 진출 전략안</p>
+</div>
+<div class="grid grid-cols-3 gap-4 mb-8">
+<button class="flex flex-col items-center justify-center p-4 rounded-lg bg-surface-container-low hover:bg-primary/10 transition-all border border-transparent hover:border-primary group">
+<span class="material-symbols-outlined text-primary mb-2" data-icon="check_circle">check_circle</span>
+<span class="text-sm font-bold">승인</span>
+</button>
+<button class="flex flex-col items-center justify-center p-4 rounded-lg bg-surface-container-low hover:bg-primary/10 transition-all border border-transparent hover:border-primary group">
+<span class="material-symbols-outlined text-primary mb-2" data-icon="rule">rule</span>
+<span class="text-sm font-bold">조건부 승인</span>
+</button>
+<button class="flex flex-col items-center justify-center p-4 rounded-lg bg-surface-container-low hover:bg-primary/10 transition-all border border-transparent hover:border-primary group">
+<span class="material-symbols-outlined text-primary mb-2" data-icon="forum">forum</span>
+<span class="text-sm font-bold">재토론</span>
+</button>
+</div>
+<div class="bg-surface-container-low p-6 rounded-lg">
+<div class="flex justify-between items-center mb-4">
+<h5 class="text-sm font-bold">Attendance &amp; Minutes</h5>
+<span class="text-xs text-primary font-bold">Recording...</span>
+</div>
+<div class="flex -space-x-2 mb-4">
+<img alt="Attnd" class="w-8 h-8 rounded-full ring-2 ring-white" data-alt="Meeting attendee avatar 1" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDJsuCBxb3wORUv3Yj2Suut-TRO7hZ-jY2mlLJaEIy2GsETZMSmMgXXcdvLt67HGFvBSNPK_ENZsxgwwiVgCAg_ORaoxL2wbKy74Wn2Td4yOyk9IDRu_pNWLhRLEjc_EvBcATQxKSeOQXOOA6SV6RPqINDz0xtYJ0ZqMzNDsza_pIyv_3Ws98_Lo-ZzZ1h0lqZKV8PNwU_3XqtoEvUA-bFFyJV1pL-Bl07tsWzYivkSD87Ql9NPQwdSwajz5RPeI2QrQlnRbldn5Jug"/>
+<img alt="Attnd" class="w-8 h-8 rounded-full ring-2 ring-white" data-alt="Meeting attendee avatar 2" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBi5t0xbMvT2RD-7JateVORtpPsHVmcWGY3GAlPRiRVSEldgQbILoTAHSG4iPcOVK_3Rj28_fh8MzZTIoWSr5rCptNmb3a9nZHVTC80mjAJfuyVz6qF650l2SufFD6HQSTHXtMirTBqIkxMUx0WRaLXMxCeEsgcYgn6OIEiZLXeFKk3CI0dc0OVVTHJbFsD7-bqtVBjIxrK9Lpg-l3_F4embGgMgC8lblkZRfgldnewn7_evDQbtqnjaJ1YeHBdR1gdaFkFf8pzqUKj"/>
+<img alt="Attnd" class="w-8 h-8 rounded-full ring-2 ring-white" data-alt="Meeting attendee avatar 3" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDQvjGHckF39SbHggH1TZWY4Rc9ByvJKbsxyD-HzNm7V4kMqJtehwAVG3HU7wHMIhDyRrnhejYaWSK2Bhi5IL5z0n2Yac5-rJmyeAhjI1_LM_hR7hqpA5aSQjPFYA4vEqU5GdhoClhsO-kSTNxetwplUXNqJVIBXo1_dMb3ZemzcVP0_4V-TLHbEhYc5jzB3oU5RiUvegXTIzDf72GR-27flNR_AFff_8hqokFAcZlbHdn65gDE7hSndiSDVWqNCdBLPlDuwxbaFrHU"/>
+<div class="w-8 h-8 rounded-full bg-primary-container text-primary text-[10px] flex items-center justify-center font-bold ring-2 ring-white">+8</div>
+</div>
+<div class="h-24 bg-white/50 rounded p-3 text-xs text-on-surface-variant italic overflow-y-auto">
+                            (14:12) 위원장: 글로벌 시장 진출의 핵심은 로컬 파트너십 선정 기준의 명확화에 있습니다. 이에 따른 세부 가이드라인 보강이 필요해 보입니다.
+                        </div>
+</div>
+</div>
+</section>
+<!-- Step 4: Post-Meeting -->
+<section class="col-span-12 lg:col-span-5 space-y-6">
+<div class="flex items-center justify-between">
+<h3 class="text-sm font-bold uppercase tracking-widest text-outline">04 Post-Meeting</h3>
+</div>
+<div class="space-y-6">
+<!-- Task Progress -->
+<div class="bg-white rounded-lg p-6 shadow-sm ring-1 ring-black/[0.03]">
+<h4 class="font-bold text-on-surface mb-6">Task Progress</h4>
+<div class="space-y-6">
+<div>
+<div class="flex justify-between text-xs mb-2">
+<span class="font-medium">의결사항 이행률</span>
+<span class="font-bold">75%</span>
+</div>
+<div class="h-1.5 w-full bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-primary" style="width: 75%"></div>
+</div>
+</div>
+<ul class="space-y-3">
+<li class="flex items-center gap-3 text-xs">
+<span class="material-symbols-outlined text-primary text-sm">check_circle</span>
+<span>재무팀 예산 조정안 작성</span>
+</li>
+<li class="flex items-center gap-3 text-xs">
+<span class="material-symbols-outlined text-outline text-sm">radio_button_unchecked</span>
+<span class="text-on-surface-variant">글로벌 지사 가이드라인 배포</span>
+</li>
+</ul>
+</div>
+</div>
+<!-- CEO Summary Report -->
+<div class="bg-primary-dim rounded-lg p-6 text-on-primary shadow-lg">
+<h4 class="font-bold mb-4">CEO Summary Report</h4>
+<p class="text-xs text-on-primary/80 mb-6 leading-relaxed">회의 종료 즉시 AI 기반의 핵심 요약 리포트가 생성되었습니다. 최종 승인 후 전사에 공유 가능합니다.</p>
+<button class="w-full bg-white text-primary font-bold py-3 rounded-md flex items-center justify-center gap-2 hover:bg-primary-container transition-colors">
+<span class="material-symbols-outlined" data-icon="download">download</span>
+                            Download Report
+                        </button>
+</div>
+</div>
+</section>
+</div>
+</main>
+<!-- Visual Polish: Ghost background texture -->
+<div class="fixed top-0 right-0 -z-10 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[120px] pointer-events-none"></div>
+</body></html>
