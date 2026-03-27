@@ -2,6 +2,14 @@ import React, { useState } from 'react';
 
 const Navbar = () => {
   const [isReportOpen, setIsReportOpen] = useState(false);
+  const [isMeetingOpen, setIsMeetingOpen] = useState(false);
+
+  const meetingMenus = [
+    { title: '진행 중인 회의', icon: 'live_tv', desc: '현재 활성화된 세션 바로가기' },
+    { title: '새 회의 예약', icon: 'add_task', desc: '신규 안건 및 일정 등록' },
+    { title: '지난 회의 기록', icon: 'calendar_month', desc: '의결 완료된 지난 회의 목록' },
+    { title: '참석 현황판', icon: 'groups', desc: '위원별 참석률 및 연간 통계' },
+  ];
 
   const reportMenus = [
     { title: 'AI 핵심 요약', icon: 'analytics', desc: '회의 전체 내용을 AI가 분석한 결론' },
@@ -16,7 +24,40 @@ const Navbar = () => {
         <span className="text-xl font-bold text-slate-700 tracking-tight font-headline cursor-pointer hover:text-primary transition-colors">경영집행위원회</span>
         <div className="hidden md:flex gap-8 items-center">
           <a className="text-slate-900 border-b-2 border-slate-500 pb-1 font-semibold tracking-tight text-sm" href="#">Home</a>
-          <a className="text-slate-500 hover:text-slate-700 transition-colors font-semibold tracking-tight text-sm" href="#">Meetings</a>
+          
+          {/* Meetings Dropdown */}
+          <div 
+            className="relative group"
+            onMouseEnter={() => setIsMeetingOpen(true)}
+            onMouseLeave={() => setIsMeetingOpen(false)}
+          >
+            <button className="flex items-center gap-1 text-slate-500 hover:text-slate-700 transition-colors font-semibold tracking-tight text-sm focus:outline-none">
+              Meetings
+              <span className={`material-symbols-outlined text-sm transition-transform duration-300 ${isMeetingOpen ? 'rotate-180' : ''}`}>expand_more</span>
+            </button>
+            <div className={`absolute top-full -left-4 w-72 pt-4 transition-all duration-300 transform ${isMeetingOpen ? 'opacity-100 translate-y-0 visible' : 'opacity-0 -translate-y-2 invisible'}`}>
+              <div className="bg-white rounded-xl shadow-[0_10px_40px_rgba(0,0,0,0.1)] border border-slate-100 overflow-hidden ring-1 ring-black/5">
+                <div className="p-2 border-b border-slate-50 bg-slate-50/50 flex items-center justify-between">
+                  <span className="text-[10px] uppercase tracking-widest text-slate-400 font-black px-3 py-1 text-primary">Live Sessions</span>
+                  <span className="w-1.5 h-1.5 bg-primary rounded-full animate-ping mr-4"></span>
+                </div>
+                <div className="p-2">
+                  {meetingMenus.map((menu, idx) => (
+                    <a key={idx} href="#" className="flex items-start gap-3 p-3 rounded-lg hover:bg-primary/5 transition-all group/item">
+                      <div className="p-2 bg-slate-50 rounded-md group-hover/item:bg-white group-hover/item:text-primary transition-colors shadow-sm">
+                        <span className="material-symbols-outlined text-lg">{menu.icon}</span>
+                      </div>
+                      <div>
+                        <p className="text-xs font-bold text-slate-800 group-hover/item:text-primary">{menu.title}</p>
+                        <p className="text-[10px] text-slate-400 mt-0.5">{menu.desc}</p>
+                      </div>
+                    </a>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+
           <a className="text-slate-500 hover:text-slate-700 transition-colors font-semibold tracking-tight text-sm" href="#">Tasks</a>
           
           {/* Reports Dropdown */}
@@ -29,21 +70,15 @@ const Navbar = () => {
               Reports
               <span className={`material-symbols-outlined text-sm transition-transform duration-300 ${isReportOpen ? 'rotate-180' : ''}`}>expand_more</span>
             </button>
-            
-            {/* Dropdown Menu Overlay */}
             <div className={`absolute top-full -left-4 w-72 pt-4 transition-all duration-300 transform ${isReportOpen ? 'opacity-100 translate-y-0 visible' : 'opacity-0 -translate-y-2 invisible'}`}>
               <div className="bg-white rounded-xl shadow-[0_10px_40px_rgba(0,0,0,0.1)] border border-slate-100 overflow-hidden ring-1 ring-black/5">
                 <div className="p-2 border-b border-slate-50 bg-slate-50/50">
-                  <span className="text-[10px] uppercase tracking-widest text-slate-400 font-black px-3 py-1">Detail Analysis</span>
+                  <span className="text-[10px] uppercase tracking-widest text-slate-400 font-black px-3 py-1 text-primary">Detail Analysis</span>
                 </div>
                 <div className="p-2">
                   {reportMenus.map((menu, idx) => (
-                    <a 
-                      key={idx} 
-                      href="#" 
-                      className="flex items-start gap-3 p-3 rounded-lg hover:bg-primary/5 transition-all group/item"
-                    >
-                      <div className="p-2 bg-slate-50 rounded-md group-hover/item:bg-white group-hover/item:text-primary transition-colors">
+                    <a key={idx} href="#" className="flex items-start gap-3 p-3 rounded-lg hover:bg-primary/5 transition-all group/item">
+                      <div className="p-2 bg-slate-50 rounded-md group-hover/item:bg-white group-hover/item:text-primary transition-colors shadow-sm">
                         <span className="material-symbols-outlined text-lg">{menu.icon}</span>
                       </div>
                       <div>
@@ -52,9 +87,6 @@ const Navbar = () => {
                       </div>
                     </a>
                   ))}
-                </div>
-                <div className="p-3 bg-slate-50/80 border-t border-slate-100 text-center">
-                  <button className="text-[10px] font-bold text-primary hover:underline">통합 대시보드로 이동 ➔</button>
                 </div>
               </div>
             </div>
