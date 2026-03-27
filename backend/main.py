@@ -40,6 +40,20 @@ current_status = MeetingStatus(elapsed_time="15:00", current_agenda_id=3, attend
 def get_agendas():
     return agendas
 
+@app.post("/api/agendas")
+def create_agenda(agenda_data: dict):
+    new_id = max([a.id for a in agendas]) + 1 if agendas else 1
+    new_agenda = Agenda(
+        id=new_id,
+        title=agenda_data.get("title", "No Title"),
+        status="Pending",
+        description=agenda_data.get("description"),
+        reviewer=agenda_data.get("department"),
+        time_ago="Just now"
+    )
+    agendas.append(new_agenda)
+    return new_agenda
+
 @app.get("/api/status", response_model=MeetingStatus)
 def get_status():
     return current_status

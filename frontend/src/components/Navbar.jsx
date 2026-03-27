@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 
-const Navbar = () => {
+const Navbar = ({ setView }) => {
   const [isReportOpen, setIsReportOpen] = useState(false);
   const [isMeetingOpen, setIsMeetingOpen] = useState(false);
 
   const meetingMenus = [
-    { title: '진행 중인 회의', icon: 'live_tv', desc: '현재 활성화된 세션 바로가기' },
-    { title: '새 회의 예약', icon: 'add_task', desc: '신규 안건 및 일정 등록' },
-    { title: '지난 회의 기록', icon: 'calendar_month', desc: '의결 완료된 지난 회의 목록' },
-    { title: '참석 현황판', icon: 'groups', desc: '위원별 참석률 및 연간 통계' },
+    { title: '진행 중인 회의', icon: 'live_tv', desc: '현재 활성화된 세션 바로가기', action: () => setView('dashboard') },
+    { title: '새 회의 예약', icon: 'add_task', desc: '신규 안건 및 일정 등록', action: () => setView('agenda-form') },
+    { title: '지난 회의 기록', icon: 'calendar_month', desc: '의결 완료된 지난 회의 목록', action: () => {} },
+    { title: '참석 현황판', icon: 'groups', desc: '위원별 참석률 및 연간 통계', action: () => {} },
   ];
 
   const reportMenus = [
@@ -21,9 +21,14 @@ const Navbar = () => {
   return (
     <nav className="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-md border-b border-slate-200/10 shadow-[0_20px_50px_rgba(43,52,55,0.05)] flex justify-between items-center px-12 py-4">
       <div className="flex items-center gap-8">
-        <span className="text-xl font-bold text-slate-700 tracking-tight font-headline cursor-pointer hover:text-primary transition-colors">경영집행위원회</span>
+        <span 
+          onClick={() => setView('dashboard')}
+          className="text-xl font-bold text-slate-700 tracking-tight font-headline cursor-pointer hover:text-primary transition-colors"
+        >
+          경영집행위원회
+        </span>
         <div className="hidden md:flex gap-8 items-center">
-          <a className="text-slate-900 border-b-2 border-slate-500 pb-1 font-semibold tracking-tight text-sm" href="#">Home</a>
+          <a onClick={() => setView('dashboard')} className="text-slate-900 border-b-2 border-slate-500 pb-1 font-semibold tracking-tight text-sm cursor-pointer" href="#">Home</a>
           
           {/* Meetings Dropdown */}
           <div 
@@ -43,7 +48,14 @@ const Navbar = () => {
                 </div>
                 <div className="p-2">
                   {meetingMenus.map((menu, idx) => (
-                    <a key={idx} href="#" className="flex items-start gap-3 p-3 rounded-lg hover:bg-primary/5 transition-all group/item">
+                    <button 
+                      key={idx} 
+                      onClick={() => {
+                        menu.action();
+                        setIsMeetingOpen(false);
+                      }}
+                      className="w-full text-left flex items-start gap-3 p-3 rounded-lg hover:bg-primary/5 transition-all group/item"
+                    >
                       <div className="p-2 bg-slate-50 rounded-md group-hover/item:bg-white group-hover/item:text-primary transition-colors shadow-sm">
                         <span className="material-symbols-outlined text-lg">{menu.icon}</span>
                       </div>
@@ -51,7 +63,7 @@ const Navbar = () => {
                         <p className="text-xs font-bold text-slate-800 group-hover/item:text-primary">{menu.title}</p>
                         <p className="text-[10px] text-slate-400 mt-0.5">{menu.desc}</p>
                       </div>
-                    </a>
+                    </button>
                   ))}
                 </div>
               </div>

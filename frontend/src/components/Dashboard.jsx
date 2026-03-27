@@ -234,6 +234,52 @@ const Dashboard = () => {
             </div>
           </div>
         </section>
+
+        {/* Row 3 (New): Full Agenda List */}
+        <section className="col-span-12 mt-4">
+          <div className="h-10 flex items-center justify-between mb-6 px-2">
+            <h3 className="text-sm font-bold uppercase tracking-widest text-outline">05 All Agendas & Submissions</h3>
+            <span className="text-[10px] font-bold text-slate-400">TOTAL: {agendas.length} ITEMS</span>
+          </div>
+          <div className="bg-white/40 backdrop-blur-lg rounded-3xl p-8 shadow-xl border border-white/50 ring-1 ring-black/[0.02]">
+            <div className="space-y-4">
+              {agendas.slice().reverse().map((agenda) => (
+                <div key={agenda.id} className="flex items-center justify-between p-6 bg-white rounded-2xl border border-slate-100 shadow-sm hover:shadow-md hover:border-primary/20 transition-all group animate-in slide-in-from-right duration-500">
+                  <div className="flex items-center gap-6">
+                    <div className="p-3 bg-slate-50 rounded-xl group-hover:bg-primary/5 group-hover:text-primary transition-colors">
+                      <span className="material-symbols-outlined text-2xl">
+                        {agenda.status === 'Approved' ? 'check_circle' : 'pending'}
+                      </span>
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-slate-800 text-lg group-hover:text-primary transition-colors">{agenda.title}</h4>
+                      <div className="flex gap-4 mt-2">
+                        <span className="text-[10px] font-bold text-slate-400 flex items-center gap-1.5 uppercase tracking-widest">
+                          <span className="material-symbols-outlined text-sm">business</span>
+                          {agenda.reviewer || 'N/A'}
+                        </span>
+                        <span className="text-[10px] font-bold text-slate-400 flex items-center gap-1.5 uppercase tracking-widest">
+                          <span className="material-symbols-outlined text-sm">schedule</span>
+                          {agenda.time_ago}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-4">
+                    <span className={`px-4 py-1.5 rounded-full text-[10px] font-black tracking-widest uppercase border ${
+                      agenda.status === 'Approved' 
+                        ? 'bg-primary/5 border-primary/20 text-primary' 
+                        : 'bg-slate-100 border-slate-200 text-slate-400'
+                    }`}>
+                      {agenda.status}
+                    </span>
+                    <button className="material-symbols-outlined p-2 text-slate-300 hover:text-slate-600 hover:bg-slate-50 rounded-lg transition-all">more_vert</button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
       </div>
     </main>
   );
